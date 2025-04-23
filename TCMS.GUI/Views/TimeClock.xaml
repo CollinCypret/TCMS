@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="TCMS.GUI.Views.TimeClock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:TCMS.GUI.Views"
+             xmlns:utilities="clr-namespace:TCMS.GUI.Utilities" 
+             xmlns:viewmodels="clr-namespace:TCMS.GUI.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:TimeClockViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
+
+    <UserControl.Resources>
+        <utilities:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <SolidColorBrush x:Key="DetailBackgroundBrush" Color="#FF272B2F"/>
+        <!-- Define the TextBlock style for details -->
+        <Style x:Key="DetailTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="pack://application:,,,/;component/Assets/Fonts/#Rubik Regular"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <!-- Style for the GridView Column Header -->
+        <Style x:Key="GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <!--// Base Grid //-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <!-- New row for the Timesheet View button -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid x:Name="SearchBarGrid" 
+              Margin="10" 
+              Background="Transparent" 
+              Height="40" 
+              HorizontalAlignment="Left" 
+              Width="550"
+              VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+        </Grid>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <utilities:Btn Style="{StaticResource DynamicWidthBtnStyle}" 
+                            Command="{Binding ClockInCommand}">
+                <TextBlock Text="Clock In" Style="{StaticResource ViewsButtonText}"/>
+            </utilities:Btn>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <utilities:Btn Style="{StaticResource DynamicWidthBtnStyle}" 
+                    Command="{Binding ClockOutCommand}">
+                <TextBlock Text="Clock Out" Style="{StaticResource ViewsButtonText}"/>
+            </utilities:Btn>
+        </Grid>
+
+        <!-- New Grid for Timesheet View Button -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        
+        <ListView Grid.Row="4" 
+                ItemsSource="{Binding TimeRecords}"
+                Background="{StaticResource DetailBackgroundBrush}"
+                BorderBrush="{x:Null}"
+                Foreground="White"
+                ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,5,0,0">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Padding" Value="10"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#333"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#555"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                    <GridViewColumn Header="Clock In" DisplayMemberBinding="{Binding ClockInTime}" Width="200"/>
+                    <GridViewColumn Header="Clock Out" DisplayMemberBinding="{Binding ClockOutTime}" Width="200"/>
+                    <GridViewColumn Header="Total Hours" DisplayMemberBinding="{Binding TotalHours}" Width="200"/>
+                    <!-- Additional columns can be added here -->
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        
+
+        <!-- Your existing Grid with other controls goes here -->
+
+    </Grid>
+</UserControl>

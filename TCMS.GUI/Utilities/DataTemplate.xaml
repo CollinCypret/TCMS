@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:TCMS.GUI.ViewModels"
+                    xmlns:view="clr-namespace:TCMS.GUI.Views">
+
+    <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+        <view:Home/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:EmployeeViewModel}">
+        <view:Employees/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:EquipmentViewModel}">
+        <view:Equipment/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ShipmentsViewModel}">
+        <view:Shipments/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ProductsViewModel}">
+        <view:Products/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:IncidentLogViewModel}">
+        <view:IncidentLog/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:TimeClockViewModel}">
+        <view:TimeClock/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:DrugTestViewModel}">
+        <view:DrugTests/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:AssignmentsViewModel}">
+        <view:Assignments/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ReportViewModel}">
+        <view:Reports/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:OrderViewModel}">
+        <view:Orders/>
+    </DataTemplate>
+
+</ResourceDictionary>

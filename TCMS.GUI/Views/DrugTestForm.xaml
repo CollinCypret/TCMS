@@ -1,0 +1,139 @@
+﻿<Window x:Class="TCMS.GUI.Views.DrugTestForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCMS.GUI.Views" xmlns:viewmodels="clr-namespace:TCMS.GUI.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:DrugTestFormViewModel}"
+        mc:Ignorable="d"
+        Title="Create Drug Test" Height="599" Width="742">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="22"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" >
+
+        </Grid>
+        <!-- Name TextBox -->
+        <Label  Content="Choose Follow Up Test Date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="392,20,0,0" Grid.Row="6" Grid.RowSpan="2"/>
+        <DatePicker x:Name ="datePicker" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="bottom" SelectedDate="{Binding FollowUpTestDate, Mode=TwoWay}"/>
+
+        <!-- Description TextBox -->
+        <Label Grid.Row="2" Content="Enter Test Details" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-26,0,0"/>
+        <TextBox Grid.Row="2"
+                 Grid.Column="1"
+                 Text="{Binding TestDetails, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource PlaceholderTextBoxStyle}"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Disabled"
+                 MinLines="5"
+                 MaxLines="10"/>
+
+
+        <!-- Confirm Button -->
+        <Button Content="Confirm"
+                Grid.Row="6"
+                Command="{Binding ConfirmCommand}"
+                HorizontalAlignment="Right"
+                Margin="0,20,0,0"/>
+        <Grid Grid.Row="4" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+        </Grid>
+        <Grid Grid.Row="5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="127"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="77"/>
+                <ColumnDefinition Width="49"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="84"/>
+                <ColumnDefinition Width="52"/>
+                <ColumnDefinition Width="126"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
+
+            </Grid.ColumnDefinitions>
+            <Label Content="Enter the Date" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-26,0,0" Height="26" Width="85"/>
+            <DatePicker x:Name ="datePicker1" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedDate="{Binding TestDate, Mode=TwoWay}" Height="22" Width="101"/>
+            <Label Grid.Column="2" Content="Enter the Employee" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-26,0,0" Grid.ColumnSpan="2" Height="26" Width="112"/>
+            <Label Grid.Column="5" Content="Enter the Test Type" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-26,0,0" Height="26" Width="110"/>
+            <ComboBox Grid.Column="2"
+                      Text="ID    NAME    DESC"
+                      ItemsSource="{Binding FilteredEmployees}"
+                      SelectedItem="{Binding SelectedEmployee}"
+                      DisplayMemberPath="FullName"
+                      IsEditable="True"
+                      IsReadOnly="False"
+                      TextSearch.TextPath="FullName"
+                      StaysOpenOnEdit="True" Grid.ColumnSpan="2"/>
+
+            <ComboBox Text="Select an option..."
+                      ItemsSource="{Binding TestTypes}" 
+                      SelectedItem="{Binding TestType}"  
+                      Grid.Column="5" 
+                      IsEditable="True"
+                      IsReadOnly="False"
+                      Width="126" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Center"
+                      StaysOpenOnEdit="True" Grid.ColumnSpan="2" Height="22">
+
+                <!-- Add more items as needed -->
+
+            </ComboBox>
+            <Label Grid.Column="7" Content="Enter the Results"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-26,0,0" Height="26" Width="98"/>
+            <ComboBox   ItemsSource="{Binding TestResults}" SelectedItem="{Binding TestResult}"  Grid.Column="7" Width="126" VerticalAlignment="Center" HorizontalAlignment="Center" Height="22">
+                <!-- Add more items as needed -->
+
+
+            </ComboBox>
+            <Label Grid.Column="9" Content="Incident Report Id" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,-26,0,0" Width="126" Height="26"/>
+            <TextBox Grid.Column="9"
+                     Text="{Binding IncidentReportId, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource PlaceholderTextBoxStyle}"/>
+
+        </Grid>
+        <CheckBox
+                  Content="Is Follow Up Complete?" 
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Bottom"
+                  
+                  IsChecked ="{Binding IsFatal, Mode=TwoWay}" Margin="0,25,0,0" Grid.Row="6"/>
+
+        <Grid Grid.Row="7" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="127"/>
+                <ColumnDefinition Width="10"/>
+
+            </Grid.ColumnDefinitions>
+
+
+
+        </Grid>
+
+    </Grid>
+
+</Window>

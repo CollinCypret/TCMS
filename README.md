@@ -66,4 +66,6 @@ Start the application by pressing `F5` or by using the `Debug > Start Debugging`
 
 
 <img src="Docs\Docs1.png" alt="Docs/all_nodes.png">
+- Username:Admin
+- Password:Admin1!
 <img src="Docs\Docs2.png" alt="Docs/settings.png">
